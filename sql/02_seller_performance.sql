@@ -1,12 +1,23 @@
--- Session 12 — S10Q2: Seller Performance Tiering
+-- Q2: Do high-revenue sellers get better reviews?
 -- Dataset: Brazilian E-Commerce (Olist)
--- Date: 2026-05-28
+-- Date: 2026-11-22
 
 -- run before query if timeout occurs
 -- SET SESSION net_read_timeout = 600;
 -- SET SESSION net_write_timeout = 600;
 
-WITH revenue_per_seller AS (
+WITH order_sellers_review AS (
+    SELECT DISTINCT 
+		orders.order_id, 
+        order_reviews.review_score AS review_score, 
+        order_items.seller_id AS seller_id,
+        order_reviews.review_id
+	FROM order_reviews
+    JOIN order_items ON order_reviews.order_id = order_items.order_id
+    JOIN orders ON order_items.order_id = orders.order_id
+    WHERE orders.order_status = 'delivered'
+),
+revenue_per_seller AS (
     SELECT
         order_items.seller_id AS seller_id,
         ROUND(SUM(order_items.price) + SUM(order_items.freight_value), 2) AS revenue
@@ -24,12 +35,10 @@ revenue_tiles AS (
 ),
 average_review_score AS (
     SELECT
-        sellers.seller_id AS seller_id,
+        seller_id,
         ROUND(AVG(review_score), 2) AS avg_score
-    FROM order_reviews
-    JOIN order_items ON order_reviews.order_id = order_items.order_id
-    JOIN sellers ON order_items.seller_id = sellers.seller_id
-    GROUP BY sellers.seller_id
+    FROM order_sellers_review
+    GROUP BY seller_id
 )
 SELECT
     average_review_score.seller_id,
@@ -43,4 +52,6 @@ SELECT
     END AS revenue_tiers
 FROM revenue_tiles
 JOIN average_review_score ON revenue_tiles.seller_id = average_review_score.seller_id
-ORDER BY revenue_tiers, avg_score DESC;
+ORDER BY revenue_tiles DESC, avg_score DESC;
+
+
