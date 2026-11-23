@@ -23,10 +23,10 @@ revenue_per_month AS
 SELECT
     `Year-Month`,
     revenue,
-    LAG(revenue) OVER (ORDER BY `Year-Month`)                                                                                AS last_month_revenue,
+    LAG(revenue) OVER (ORDER BY `Year-Month`) AS last_month_revenue,
     ROUND(
         (revenue - LAG(revenue) OVER (ORDER BY `Year-Month`))
         / LAG(revenue) OVER (ORDER BY `Year-Month`) * 100,
-    2)                                                                                                                       AS growth_rate
+    2) AS growth_rate
 FROM revenue_per_month
 ORDER BY `Year-Month`;
