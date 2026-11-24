@@ -2,9 +2,7 @@
 -- Date: 2026-05-25
 -- Dataset: Olist (9 tables)
 
--- ============================================================
 -- 1. ROW COUNTS
--- ============================================================
 SELECT COUNT(*) FROM customers;                         -- 99441
 SELECT COUNT(*) FROM geolocation;                       -- 1000163
 SELECT COUNT(*) FROM order_items;                       -- 112650
@@ -15,10 +13,7 @@ SELECT COUNT(*) FROM product_category_name_translation; -- 71
 SELECT COUNT(*) FROM products;                          -- 32951
 SELECT COUNT(*) FROM sellers;                           -- 3095
 
--- ============================================================
 -- 2. NULL CHECKS
--- ============================================================
-
 # customers
 SELECT
 	SUM(CASE WHEN customer_id IS NULL THEN 1 ELSE 0 END) customer_id_nulls,
@@ -118,10 +113,7 @@ SELECT
 FROM sellers;
 -- all 0
 
--- ============================================================
 -- 3. EMPTY STRING CHECKS
--- ============================================================
-
 # customers
 SELECT
 	SUM(CASE WHEN customer_id = '' THEN 1 ELSE 0 END) customer_id_empty,
@@ -138,10 +130,7 @@ SELECT
     SUM(CASE WHEN review_comment_message = '' THEN 1 ELSE 0 END) review_comment_message_empty -- 9
 FROM order_reviews;
 
--- ============================================================
 -- 4. DUPLICATE CHECKS
--- ============================================================
-
 # customers
 SELECT customer_id, COUNT(*) AS duplicate_count
 FROM customers
@@ -204,10 +193,7 @@ GROUP BY seller_id
 HAVING COUNT(*) > 1;
 -- no duplicates
 
--- ============================================================
 -- 5. DATE RANGES
--- ============================================================
-
 SELECT MIN(order_purchase_timestamp), MAX(order_purchase_timestamp)
 FROM orders;
 -- 2016 to 2018 — valid range
@@ -251,9 +237,7 @@ JOIN orders ON thd.order_id = orders.order_id
 JOIN customers ON orders.customer_id = customers.customer_id
 ORDER BY total_hours_delivery;
 
--- ============================================================
 -- 6. UNEXPECTED VALUES
--- ============================================================
 
 SELECT price, freight_value FROM order_items ORDER BY price, freight_value;          -- no negatives
 SELECT payment_value FROM order_payments ORDER BY payment_value;                     -- no negatives
@@ -261,10 +245,7 @@ SELECT review_score FROM order_reviews ORDER BY review_score;                   
 SELECT product_weight_g, product_length_cm, product_height_cm, product_width_cm
 FROM products ORDER BY product_weight_g;                                             -- no negatives
 
--- ============================================================
 -- 7. FOREIGN KEY CHECKS
--- ============================================================
-
 -- orders.customer_id → customers
 SELECT COUNT(*) FROM orders o
 LEFT JOIN customers c ON o.customer_id = c.customer_id
