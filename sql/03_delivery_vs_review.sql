@@ -1,4 +1,4 @@
--- Session 13 — S10Q3: Delivery Time Impact on Review Score
+-- Q3: Delivery Time Impact on Review Score
 -- Dataset: Brazilian E-Commerce (Olist)
 -- Date: 2026-05-29
 

@@ -1,4 +1,4 @@
--- Session 11 — S10Q1: Monthly Revenue Trend with Month-over-Month Growth Rate
+-- Q1: Monthly Revenue Trend with Month-over-Month Growth Rate
 -- Dataset: Brazilian E-Commerce (Olist)
 -- Date: 2026-05-28
 

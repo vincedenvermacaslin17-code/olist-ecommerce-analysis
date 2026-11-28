@@ -1,4 +1,4 @@
--- Session 10 — Brazilian E-Commerce: Data Cleaning
+-- Brazilian E-Commerce: Data Cleaning
 -- Date: 2026-05-25
 -- Dataset: Olist (9 tables)
 
