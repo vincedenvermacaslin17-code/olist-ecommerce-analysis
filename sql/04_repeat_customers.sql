@@ -1,6 +1,5 @@
 -- Q4: Repeat Customer Revenue Share
 -- Dataset: Brazilian E-Commerce (Olist)
--- Date: 2026-05-30
 
 WITH customer_orders AS (
     SELECT

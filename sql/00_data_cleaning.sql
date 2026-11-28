@@ -1,5 +1,4 @@
 -- Brazilian E-Commerce: Data Cleaning
--- Date: 2026-05-25
 -- Dataset: Olist (9 tables)
 
 -- 1. ROW COUNTS
@@ -198,7 +197,7 @@ SELECT MIN(order_purchase_timestamp), MAX(order_purchase_timestamp)
 FROM orders;
 -- 2016 to 2018 — valid range
 
--- bonus: delivery time exploration (preview of S10Q3)
+-- bonus: delivery time exploration 
 CREATE TEMPORARY TABLE total_days_delivery_table AS
 SELECT order_id,
 	MIN(order_purchase_timestamp) AS order_purchase_date,

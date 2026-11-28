@@ -1,6 +1,5 @@
 -- Q2: Do high-revenue sellers get better reviews?
 -- Dataset: Brazilian E-Commerce (Olist)
--- Date: 2026-11-22
 
 -- run before query if timeout occurs
 -- SET SESSION net_read_timeout = 600;

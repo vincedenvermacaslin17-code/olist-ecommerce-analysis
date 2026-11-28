@@ -1,6 +1,5 @@
 -- Q1: Monthly Revenue Trend with Month-over-Month Growth Rate
 -- Dataset: Brazilian E-Commerce (Olist)
--- Date: 2026-05-28
 
 WITH total_price_and_freight AS
 (
